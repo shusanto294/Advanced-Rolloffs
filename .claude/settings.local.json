@@ -2,7 +2,8 @@
   "permissions": {
     "allow": [
       "Bash(dir:*)",
-      "Bash(ls:*)"
+      "Bash(ls:*)",
+      "Bash(del template-elementor-canvas.php template-elementor-full-width.php elementor-debug.php)"
     ]
   }
 }
