@@ -13,6 +13,11 @@ get_header();
 // Check if this is the 'home' page slug - if so, show hardcoded template
 global $post;
 if ( isset( $post->post_name ) && $post->post_name === 'home' ) :
+
+// Add breadcrumbs
+if ( function_exists('advanced_rolloffs_breadcrumbs') && !is_front_page() ) {
+    advanced_rolloffs_breadcrumbs();
+}
 ?>
 
     <!-- Hero Section -->
@@ -44,9 +49,50 @@ if ( isset( $post->post_name ) && $post->post_name === 'home' ) :
                     </div>
 
                     <div class="hero-buttons">
-                        <a href="<?php echo esc_url( home_url( '/contact' ) ); ?>" class="btn btn-primary">Get a Free Quote</a>
-                        <a href="tel:+1234567890" class="btn btn-secondary">
-                            <span>📞</span> Call Now
+                        <a href="https://app.icans.ai/customer-portal/advanced-roll-offs/book/" target="_blank" class="btn btn-primary">Get a Free Quote</a>
+                        <a href="tel:+317-564-3094" class="btn btn-secondary">
+                            <span>
+                                <svg version="1.1" id="fi_597177" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 513.64 513.64" style="enable-background:new 0 0 513.64 513.64;width:20px;fill:currentColor;" xml:space="preserve">
+                                <g>
+                                    <g>
+                                        <path d="M499.66,376.96l-71.68-71.68c-25.6-25.6-69.12-15.359-79.36,17.92c-7.68,23.041-33.28,35.841-56.32,30.72
+                                            c-51.2-12.8-120.32-79.36-133.12-133.12c-7.68-23.041,7.68-48.641,30.72-56.32c33.28-10.24,43.52-53.76,17.92-79.36l-71.68-71.68
+                                            c-20.48-17.92-51.2-17.92-69.12,0l-48.64,48.64c-48.64,51.2,5.12,186.88,125.44,307.2c120.32,120.32,256,176.641,307.2,125.44
+                                            l48.64-48.64C517.581,425.6,517.581,394.88,499.66,376.96z"></path>
+                                    </g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                </svg>
+                            </span> Call Now
                         </a>
                     </div>
                 </div>
@@ -59,8 +105,9 @@ if ( isset( $post->post_name ) && $post->post_name === 'home' ) :
         <div class="container">
             <div class="service-area-content">
                 <div class="service-area-text">
-                    <h2>Roll Off Dumpsters: Local Kentucky Dumpster Rentals for Any Size Project</h2>
-                    <p class="service-area-description">Advanced Rolloffs locally rents out roll-off dumpsters for projects of any size in Louisville and Lexington, Kentucky. Our waste disposal solutions are hassle-free, secure, and hygienic. We present 7 types of roll-off dumpster rentals from 6-yard to 40-yard dumpsters. Advanced Rolloffs is the reliable choice for your Kentucky dumpster rental needs, ensuring a seamless, secure, and sanitary experience.</p>
+                    <h2>Roll Off Dumpsters:  Local Indiana Dumpster Rentals for Any Size Project</h2>
+                    <p class="service-area-description">Advanced Roll Offs locally rents out **roll-off dumpsters** for projects of any size in the **Indianapolis, Indiana area**. Our waste disposal solutions are hassle-free, secure, and hygienic. We offer 4 types of **roll-off dumpster rentals**, ranging from 10-yard to 40-yard dumpsters to fit residential cleanouts, construction debris, remodeling, and more.</p><br>
+                    <p class="service-area-description">Advanced Roll Offs is the reliable choice for your **dumpster rental needs in Indianapolis, IN**, ensuring a seamless, secure, and sanitary experience with prompt delivery and pickup across the greater Indy metro area. Contact us today for affordable **roll off dumpster rental in Indianapolis, Indiana**!</p>
                 </div>
                 <div class="featured-image-wrapper">
                     <img src="<?php echo esc_url( get_template_directory_uri() . '/img/3.webp' ); ?>" alt="Roll Off Dumpster Rental in Kentucky" class="featured-image">
@@ -117,7 +164,7 @@ if ( isset( $post->post_name ) && $post->post_name === 'home' ) :
                             <span>Damage-free guarantee</span>
                         </div>
                     </div>
-                    <a href="<?php echo esc_url( home_url( '/contact' ) ); ?>" class="btn btn-primary">Get Your Free Quote</a>
+                    <a href="https://app.icans.ai/customer-portal/advanced-roll-offs/book/" target="_blank" class="btn btn-primary">Get Your Free Quote</a>
                 </div>
                 <div class="featured-image-wrapper">
                     <img src="<?php echo esc_url( get_template_directory_uri() . '/img/2.webp' ); ?>" alt="Driveway Protection with Advanced Rolloffs" class="featured-image">
@@ -143,10 +190,10 @@ if ( isset( $post->post_name ) && $post->post_name === 'home' ) :
                         <li>Small bathroom remodels</li>
                         <li>Yard waste</li>
                     </ul>
-                    <a href="<?php echo esc_url( home_url( '/contact' ) ); ?>" class="btn-link">Get Quote →</a>
+                    <a href="https://app.icans.ai/customer-portal/advanced-roll-offs/book/" target="_blank" class="btn-link">Get Quote →</a>
                 </div>
-                <div class="size-card featured">
-                    <div class="popular-badge">Most Popular</div>
+                <div class="size-card">
+                    
                     <h3>20 Yard</h3>
                     <p class="size-dimensions">22' L × 8' W × 4.5' H</p>
                     <p>Perfect for medium-sized projects and renovations</p>
@@ -155,9 +202,10 @@ if ( isset( $post->post_name ) && $post->post_name === 'home' ) :
                         <li>Roof replacements</li>
                         <li>Large cleanouts</li>
                     </ul>
-                    <a href="<?php echo esc_url( home_url( '/contact' ) ); ?>" class="btn-link">Get Quote →</a>
+                    <a href="https://app.icans.ai/customer-portal/advanced-roll-offs/book/" target="_blank" class="btn-link">Get Quote →</a>
                 </div>
-                <div class="size-card">
+                <div class="size-card featured">
+                    <div class="popular-badge">Most Popular</div>
                     <h3>30 Yard</h3>
                     <p class="size-dimensions">22' L × 8' W × 6' H</p>
                     <p>Great for large residential or commercial projects</p>
@@ -166,7 +214,7 @@ if ( isset( $post->post_name ) && $post->post_name === 'home' ) :
                         <li>Major demolitions</li>
                         <li>Estate cleanouts</li>
                     </ul>
-                    <a href="<?php echo esc_url( home_url( '/contact' ) ); ?>" class="btn-link">Get Quote →</a>
+                    <a href="https://app.icans.ai/customer-portal/advanced-roll-offs/book/" target="_blank" class="btn-link">Get Quote →</a>
                 </div>
                 <div class="size-card">
                     <h3>40 Yard</h3>
@@ -177,7 +225,7 @@ if ( isset( $post->post_name ) && $post->post_name === 'home' ) :
                         <li>Commercial demolitions</li>
                         <li>Major cleanups</li>
                     </ul>
-                    <a href="<?php echo esc_url( home_url( '/contact' ) ); ?>" class="btn-link">Get Quote →</a>
+                    <a href="https://app.icans.ai/customer-portal/advanced-roll-offs/book/" target="_blank" class="btn-link">Get Quote →</a>
                 </div>
             </div>
         </div>
@@ -280,6 +328,11 @@ if ( isset( $post->post_name ) && $post->post_name === 'home' ) :
         </div>
     </section>
 
+
+    <!-- Map section -->
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6129.187804323374!2d-86.33020102252102!3d39.81610017154237!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x886ca922490160a3%3A0x7e426579d2fd117e!2sAdvanced%20Roll%20Offs!5e0!3m2!1sen!2sus!4v1766080894480!5m2!1sen!2sus" style="border:0;width: 100%; height:450px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+
     <!-- CTA Section -->
     <section class="cta-section">
         <div class="container">
@@ -287,12 +340,13 @@ if ( isset( $post->post_name ) && $post->post_name === 'home' ) :
                 <h2>Ready to Get Started?</h2>
                 <p>Contact us today for a free quote and fast delivery</p>
                 <div class="cta-buttons">
-                    <a href="<?php echo esc_url( home_url( '/contact' ) ); ?>" class="btn btn-primary">Request a Quote</a>
-                    <a href="tel:+1234567890" class="btn btn-white">Call: (123) 456-7890</a>
+                    <a href="https://app.icans.ai/customer-portal/advanced-roll-offs/book/" target="_blank" class="btn btn-primary">Request a Quote</a>
+                    <a href="tel:+317-564-3094" class="btn btn-white">Call: 317-564-3094</a>
                 </div>
             </div>
         </div>
     </section>
+
 
 <?php
 else :

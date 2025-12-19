@@ -1,27 +1,27 @@
     <!-- Footer -->
-    <footer class="footer">
+    <footer class="footer" role="contentinfo">
         <div class="container">
             <div class="footer-content">
                 <!-- Footer Widget Area 1 - About -->
-                <div class="footer-section">
+                <div class="footer-section" role="complementary">
                     <?php if ( is_active_sidebar( 'footer-1' ) ) : ?>
                         <?php dynamic_sidebar( 'footer-1' ); ?>
                     <?php else : ?>
                         <?php if ( has_custom_logo() ) : ?>
                             <?php the_custom_logo(); ?>
                         <?php else : ?>
-                            <img src="<?php echo esc_url( get_template_directory_uri() . '/img/Logo.png' ); ?>" alt="<?php bloginfo( 'name' ); ?>" class="footer-logo">
+                            <img src="<?php echo esc_url( get_template_directory_uri() . '/img/Logo.png' ); ?>" alt="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" class="footer-logo" width="188" height="60">
                         <?php endif; ?>
                         <p class="footer-about"><?php bloginfo( 'description' ); ?></p>
                     <?php endif; ?>
                 </div>
 
                 <!-- Footer Widget Area 2 - Quick Links -->
-                <div class="footer-section">
+                <div class="footer-section" role="complementary">
                     <?php if ( is_active_sidebar( 'footer-2' ) ) : ?>
                         <?php dynamic_sidebar( 'footer-2' ); ?>
                     <?php else : ?>
-                        <h4>Quick Links</h4>
+                        <h4><?php esc_html_e( 'Quick Links', 'advanced-rolloffs' ); ?></h4>
                         <?php
                         wp_nav_menu( array(
                             'theme_location' => 'primary',
@@ -29,36 +29,38 @@
                             'container'      => false,
                             'fallback_cb'    => false,
                             'depth'          => 1,
+                            'walker'         => new Advanced_Rolloffs_Nav_Walker(),
+                            'items_wrap'     => '<ul id="%1$s" class="%2$s" role="list">%3$s</ul>',
                         ) );
                         ?>
                     <?php endif; ?>
                 </div>
 
                 <!-- Footer Widget Area 3 - Company -->
-                <div class="footer-section">
+                <div class="footer-section" role="complementary">
                     <?php if ( is_active_sidebar( 'footer-3' ) ) : ?>
                         <?php dynamic_sidebar( 'footer-3' ); ?>
                     <?php else : ?>
-                        <h4>Company</h4>
-                        <ul class="footer-links">
-                            <li><a href="<?php echo esc_url( home_url( '/about' ) ); ?>">About Us</a></li>
-                            <li><a href="<?php echo esc_url( home_url( '/contact' ) ); ?>">Contact</a></li>
-                            <li><a href="<?php echo esc_url( home_url( '/faq' ) ); ?>">FAQ</a></li>
-                            <li><a href="<?php echo esc_url( home_url( '/blog' ) ); ?>">Blog</a></li>
+                        <h4><?php esc_html_e( 'Company', 'advanced-rolloffs' ); ?></h4>
+                        <ul class="footer-links" role="list">
+                            <li><a href="<?php echo esc_url( home_url( '/about' ) ); ?>"><?php esc_html_e( 'About Us', 'advanced-rolloffs' ); ?></a></li>
+                            <li><a href="<?php echo esc_url( home_url( '/contact' ) ); ?>"><?php esc_html_e( 'Contact', 'advanced-rolloffs' ); ?></a></li>
+                            <li><a href="<?php echo esc_url( home_url( '/faq' ) ); ?>"><?php esc_html_e( 'FAQ', 'advanced-rolloffs' ); ?></a></li>
+                            <li><a href="<?php echo esc_url( home_url( '/blog' ) ); ?>"><?php esc_html_e( 'Blog', 'advanced-rolloffs' ); ?></a></li>
                         </ul>
                     <?php endif; ?>
                 </div>
 
                 <!-- Footer Widget Area 4 - Contact -->
-                <div class="footer-section">
+                <div class="footer-section" role="complementary">
                     <?php if ( is_active_sidebar( 'footer-4' ) ) : ?>
                         <?php dynamic_sidebar( 'footer-4' ); ?>
                     <?php else : ?>
-                        <h4>Contact Info</h4>
-                        <ul class="footer-contact">
-                            <li>📞 <a href="tel:+1234567890">(123) 456-7890</a></li>
-                            <li>✉️ <a href="mailto:info@advancedrolloffs.com">info@advancedrolloffs.com</a></li>
-                            <li>📍 Your City, State 12345</li>
+                        <h4><?php esc_html_e( 'Contact Info', 'advanced-rolloffs' ); ?></h4>
+                        <ul class="footer-contact" role="list">
+                            <li><span aria-hidden="true">📞</span> <a href="tel:+317-564-3094">(317) 564-3094</a></li>
+                            <li><span aria-hidden="true">✉️</span> <a href="mailto:info@advancedrolloffs.com">info@advancedrolloffs.com</a></li>
+                            <li><span aria-hidden="true">📍</span> <?php esc_html_e( 'Indianapolis, IN', 'advanced-rolloffs' ); ?></li>
                         </ul>
                     <?php endif; ?>
                 </div>
@@ -69,7 +71,7 @@
                     <?php if ( is_active_sidebar( 'footer-bottom-left' ) ) : ?>
                         <?php dynamic_sidebar( 'footer-bottom-left' ); ?>
                     <?php else : ?>
-                        <p>&copy; <?php echo date( 'Y' ); ?> <?php bloginfo( 'name' ); ?>. All rights reserved.</p>
+                        <p>&copy; <?php echo date( 'Y' ); ?> <?php bloginfo( 'name' ); ?>. <?php esc_html_e( 'All rights reserved.', 'advanced-rolloffs' ); ?></p>
                     <?php endif; ?>
                 </div>
 
@@ -78,9 +80,9 @@
                     <?php if ( is_active_sidebar( 'footer-bottom-right' ) ) : ?>
                         <?php dynamic_sidebar( 'footer-bottom-right' ); ?>
                     <?php else : ?>
-                        <div class="footer-bottom-links">
-                            <a href="<?php echo esc_url( home_url( '/privacy' ) ); ?>">Privacy Policy</a>
-                            <a href="<?php echo esc_url( home_url( '/terms' ) ); ?>">Terms of Service</a>
+                        <div class="footer-bottom-links" role="list">
+                            <a href="<?php echo esc_url( home_url( '/privacy' ) ); ?>"><?php esc_html_e( 'Privacy Policy', 'advanced-rolloffs' ); ?></a>
+                            <a href="<?php echo esc_url( home_url( '/terms' ) ); ?>"><?php esc_html_e( 'Terms of Service', 'advanced-rolloffs' ); ?></a>
                         </div>
                     <?php endif; ?>
                 </div>
