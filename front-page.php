@@ -14,10 +14,6 @@ get_header();
 global $post;
 if ( isset( $post->post_name ) && $post->post_name === 'home' ) :
 
-// Add breadcrumbs
-if ( function_exists('advanced_rolloffs_breadcrumbs') && !is_front_page() ) {
-    advanced_rolloffs_breadcrumbs();
-}
 ?>
 
     <!-- Hero Section -->

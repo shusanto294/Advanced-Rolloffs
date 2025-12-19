@@ -7,11 +7,6 @@
  */
 
 get_header();
-
-// Add breadcrumbs
-if ( function_exists('advanced_rolloffs_breadcrumbs') ) {
-    advanced_rolloffs_breadcrumbs();
-}
 ?>
 
 <main id="main" class="site-main" role="main" style="padding: 75px 0;">

@@ -322,23 +322,67 @@ if ( ! isset( $content_width ) ) {
 
 /**
  * SEO Functions
+ *
+ * This theme includes comprehensive SEO features that work seamlessly with or without SEO plugins:
+ *
+ * 1. Meta Tags: Description, keywords, robots, canonical URLs
+ * 2. Open Graph: Full Facebook/social media integration
+ * 3. Twitter Cards: Proper Twitter sharing metadata
+ * 4. Schema.org Structured Data: Article, WebPage, Organization schemas
+ * 5. Semantic HTML: Proper microdata markup (itemprop attributes)
+ * 6. XML Sitemap: Auto-generated at /sitemap.xml
+ * 7. Breadcrumbs: SEO-friendly navigation with fallback
+ * 8. Image Optimization: Auto alt tags, lazy loading, dimensions
+ * 9. Performance: Preconnect, DNS prefetch for external resources
+ *
+ * Plugin Detection: Automatically disables when Yoast SEO, Rank Math, All in One SEO, or SEOPress is active
  */
+
+// Generate SEO-friendly excerpt
+function advanced_rolloffs_get_seo_excerpt( $post_id = null ) {
+    if ( ! $post_id ) {
+        $post_id = get_the_ID();
+    }
+
+    // First, try to get the manual excerpt
+    $excerpt = get_the_excerpt( $post_id );
+
+    // If no manual excerpt, create one from content
+    if ( empty( $excerpt ) ) {
+        $content = get_post_field( 'post_content', $post_id );
+        $excerpt = wp_trim_words( wp_strip_all_tags( $content ), 30, '...' );
+    }
+
+    // Clean it up
+    $excerpt = wp_strip_all_tags( $excerpt );
+    $excerpt = str_replace( array( "\r", "\n", "\t" ), ' ', $excerpt );
+    $excerpt = preg_replace( '/\s+/', ' ', $excerpt ); // Remove extra spaces
+
+    // Limit to 160 characters for optimal SEO
+    if ( strlen( $excerpt ) > 160 ) {
+        $excerpt = substr( $excerpt, 0, 157 ) . '...';
+    }
+
+    return $excerpt;
+}
 
 // Add SEO meta tags to head
 function advanced_rolloffs_seo_meta_tags() {
     // Don't add custom meta if Yoast SEO or other major SEO plugins are active
-    if ( is_plugin_active('wordpress-seo/wp-seo.php') || 
-         is_plugin_active('all-in-one-seo-pack/all_in_one_seo_pack.php') || 
-         is_plugin_active('seo-by-rank-math/rank-math.php') ) {
+    // Check if SEO plugin classes/functions exist instead of is_plugin_active
+    if ( defined('WPSEO_VERSION') || // Yoast SEO
+         class_exists('AIOSEO\\Plugin\\AIOSEO') || // All in One SEO
+         class_exists('RankMath') || // Rank Math
+         function_exists('seopress_activation') ) { // SEOPress
         return;
     }
     
     global $post;
-    
+
     // Basic meta tags
     if ( is_singular() && ! is_front_page() ) {
         $title = single_post_title( '', false );
-        $description = get_the_excerpt() ? get_the_excerpt() : get_bloginfo( 'description' );
+        $description = advanced_rolloffs_get_seo_excerpt();
         $url = get_permalink();
         $image = has_post_thumbnail() ? get_the_post_thumbnail_url( get_the_ID(), 'large' ) : '';
     } else {
@@ -418,7 +462,12 @@ add_action( 'wp_head', 'advanced_rolloffs_seo_meta_tags', 1 );
 // Structured Data (Schema.org)
 function advanced_rolloffs_structured_data() {
     global $post;
-    
+
+    // Check if SEO plugin is handling structured data
+    if ( defined('WPSEO_VERSION') || class_exists('AIOSEO\\Plugin\\AIOSEO') || class_exists('RankMath') ) {
+        return;
+    }
+
     if ( is_front_page() ) {
         // Organization schema
         $schema = array(
@@ -447,32 +496,116 @@ function advanced_rolloffs_structured_data() {
             ),
             'sameAs' => array(),
         );
-        
-        echo '<script type="application/ld+json">' . wp_json_encode( $schema, JSON_UNESCAPED_SLASHES ) . '</script>' . "\n";
-        
+
+        echo '<script type="application/ld+json">' . wp_json_encode( $schema, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT ) . '</script>' . "\n";
+
+    } elseif ( is_singular() && 'post' === get_post_type() ) {
+        // Article schema for blog posts
+        $schema = array(
+            '@context' => 'https://schema.org',
+            '@type' => 'Article',
+            'headline' => get_the_title(),
+            'description' => get_the_excerpt() ? wp_strip_all_tags( get_the_excerpt() ) : wp_trim_words( wp_strip_all_tags( get_the_content() ), 30 ),
+            'datePublished' => get_the_date( 'c' ),
+            'dateModified' => get_the_modified_date( 'c' ),
+            'author' => array(
+                '@type' => 'Person',
+                'name' => get_the_author(),
+                'url' => get_author_posts_url( get_the_author_meta( 'ID' ) ),
+            ),
+            'publisher' => array(
+                '@type' => 'Organization',
+                'name' => get_bloginfo( 'name' ),
+                'logo' => array(
+                    '@type' => 'ImageObject',
+                    'url' => has_custom_logo() ? wp_get_attachment_image_url( get_theme_mod( 'custom_logo' ), 'full' ) : get_template_directory_uri() . '/img/Logo.png',
+                ),
+            ),
+            'mainEntityOfPage' => array(
+                '@type' => 'WebPage',
+                '@id' => get_permalink(),
+            ),
+        );
+
+        // Add featured image
+        if ( has_post_thumbnail() ) {
+            $image_id = get_post_thumbnail_id();
+            $image_data = wp_get_attachment_image_src( $image_id, 'full' );
+            $schema['image'] = array(
+                '@type' => 'ImageObject',
+                'url' => $image_data[0],
+                'width' => $image_data[1],
+                'height' => $image_data[2],
+            );
+        }
+
+        // Add article body (first 500 characters)
+        $content = wp_strip_all_tags( get_the_content() );
+        if ( ! empty( $content ) ) {
+            $schema['articleBody'] = wp_trim_words( $content, 100 );
+        }
+
+        // Add word count
+        $word_count = str_word_count( wp_strip_all_tags( get_the_content() ) );
+        if ( $word_count > 0 ) {
+            $schema['wordCount'] = $word_count;
+        }
+
+        // Add categories as keywords
+        $categories = get_the_category();
+        if ( ! empty( $categories ) ) {
+            $keywords = array();
+            foreach ( $categories as $category ) {
+                $keywords[] = $category->name;
+            }
+            $schema['keywords'] = implode( ', ', $keywords );
+        }
+
+        // Add tags
+        $tags = get_the_tags();
+        if ( ! empty( $tags ) ) {
+            $tag_names = array();
+            foreach ( $tags as $tag ) {
+                $tag_names[] = $tag->name;
+            }
+            if ( isset( $schema['keywords'] ) ) {
+                $schema['keywords'] .= ', ' . implode( ', ', $tag_names );
+            } else {
+                $schema['keywords'] = implode( ', ', $tag_names );
+            }
+        }
+
+        echo '<script type="application/ld+json">' . wp_json_encode( $schema, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT ) . '</script>' . "\n";
+
     } elseif ( is_singular() && 'page' === get_post_type() ) {
         // WebPage schema
         $schema = array(
             '@context' => 'https://schema.org',
             '@type' => 'WebPage',
             'name' => get_the_title(),
-            'description' => get_the_excerpt() ? get_the_excerpt() : get_bloginfo( 'description' ),
+            'description' => get_the_excerpt() ? wp_strip_all_tags( get_the_excerpt() ) : wp_trim_words( wp_strip_all_tags( get_the_content() ), 30 ),
             'url' => get_permalink(),
+            'datePublished' => get_the_date( 'c' ),
+            'dateModified' => get_the_modified_date( 'c' ),
             'isPartOf' => array(
                 '@type' => 'WebSite',
                 'name' => get_bloginfo( 'name' ),
                 'url' => home_url( '/' ),
             ),
         );
-        
+
         if ( has_post_thumbnail() ) {
+            $image_id = get_post_thumbnail_id();
+            $image_data = wp_get_attachment_image_src( $image_id, 'full' );
             $schema['image'] = array(
                 '@type' => 'ImageObject',
-                'url' => get_the_post_thumbnail_url( get_the_ID(), 'large' ),
+                'url' => $image_data[0],
+                'width' => $image_data[1],
+                'height' => $image_data[2],
             );
         }
-        
-        echo '<script type="application/ld+json">' . wp_json_encode( $schema, JSON_UNESCAPED_SLASHES ) . '</script>' . "\n";
+
+        echo '<script type="application/ld+json">' . wp_json_encode( $schema, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT ) . '</script>' . "\n";
     }
 }
 
