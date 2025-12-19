@@ -509,6 +509,16 @@ get_header();
     color: #b81547 !important;
 }
 
+/* Keep Related Posts titles black (not red) */
+.related-posts .related-post-content h4 a {
+    color: var(--black) !important;
+    text-decoration: none;
+}
+
+.related-posts .related-post-content h4 a:hover {
+    color: var(--primary-red) !important;
+}
+
 /* Post navigation links */
 .post-navigation a {
     color: var(--primary-red) !important;
