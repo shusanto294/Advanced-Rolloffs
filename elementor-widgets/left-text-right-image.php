@@ -75,9 +75,8 @@ class Left_Text_Right_Image_Widget extends \Elementor\Widget_Base {
             'description',
             [
                 'label' => __( 'Description', 'advanced-rolloffs' ),
-                'type' => \Elementor\Controls_Manager::TEXTAREA,
+                'type' => \Elementor\Controls_Manager::WYSIWYG,
                 'default' => __( 'Advanced Roll Offs is the reliable choice for your dumpster rental needs in Indianapolis, IN, ensuring a seamless, secure, and sanitary experience with prompt delivery and pickup across the greater Indy metro area. Contact us today for affordable roll off dumpster rental in Indianapolis, Indiana!', 'advanced-rolloffs' ),
-                'rows' => 5,
             ]
         );
 
@@ -423,7 +422,7 @@ class Left_Text_Right_Image_Widget extends \Elementor\Widget_Base {
                 <div class="content-wrapper">
                     <div class="content-text">
                         <h2><?php echo esc_html( $settings['heading'] ); ?></h2>
-                        <p class="content-description"><?php echo esc_html( $settings['description'] ); ?></p>
+                        <div class="content-description"><?php echo $settings['description']; ?></div>
 
                         <?php if ( 'yes' === $settings['show_features'] && $settings['features_list'] ) : ?>
                             <div class="driveway-features">
@@ -472,7 +471,7 @@ class Left_Text_Right_Image_Widget extends \Elementor\Widget_Base {
                 <div class="content-wrapper">
                     <div class="content-text">
                         <h2>{{{ settings.heading }}}</h2>
-                        <p class="content-description">{{{ settings.description }}}</p>
+                        <div class="content-description">{{{ settings.description }}}</div>
 
                         <# if ( 'yes' === settings.show_features && settings.features_list.length ) { #>
                             <div class="driveway-features">

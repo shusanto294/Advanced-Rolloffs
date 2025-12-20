@@ -1007,5 +1007,6 @@ function advanced_rolloffs_register_elementor_widgets( $widgets_manager ) {
 
     require_once( get_template_directory() . '/elementor-widgets/custom-cta-section.php' );
     $widgets_manager->register( new \Custom_CTA_Section_Widget() );
+
 }
 add_action( 'elementor/widgets/register', 'advanced_rolloffs_register_elementor_widgets' );
