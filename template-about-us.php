@@ -11,7 +11,7 @@ get_header();
 ?>
 
     <!-- About Hero Section -->
-    <section class="hero about-hero">
+    <section class="hero page-hero" style="background: linear-gradient(135deg, rgba(10, 10, 10, 0.85) 0%, rgba(26, 26, 26, 0.85) 50%, rgba(10, 10, 10, 0.85) 100%), url('<?php echo esc_url( get_template_directory_uri() . '/img/about-hero.webp' ); ?>') !important; background-size: cover !important; background-position: center !important;">
         <div class="hero-overlay"></div>
         <div class="hero-shapes-bg">
             <div class="hero-shape hero-shape-1"></div>
@@ -26,44 +26,6 @@ get_header();
             </div>
         </div>
     </section>
-
-    <style>
-        .about-hero {
-            min-height: auto !important;
-            max-height: 400px !important;
-            height: 400px !important;
-            padding: 100px 0 80px !important;
-            background: linear-gradient(135deg, rgba(10, 10, 10, 0.85) 0%, rgba(26, 26, 26, 0.85) 50%, rgba(10, 10, 10, 0.85) 100%), url('<?php echo esc_url( get_template_directory_uri() . '/img/about-hero.webp' ); ?>') !important;
-            background-size: cover !important;
-            background-position: center !important;
-        }
-        .about-hero .hero-overlay {
-            background: radial-gradient(circle at 20% 50%, rgba(220, 20, 60, 0.1) 0%, transparent 50%);
-        }
-        .about-hero .hero-content-wrapper {
-            min-height: auto !important;
-        }
-        .about-hero .hero-content h1 {
-            font-size: 2.5rem;
-            margin-bottom: 15px;
-        }
-        .about-hero .hero-subtitle {
-            font-size: 1.1rem;
-        }
-        @media (max-width: 768px) {
-            .about-hero {
-                height: 300px !important;
-                max-height: 300px !important;
-                padding: 60px 0 50px !important;
-            }
-            .about-hero .hero-content h1 {
-                font-size: 1.8rem;
-            }
-            .about-hero .hero-subtitle {
-                font-size: 1rem;
-            }
-        }
-    </style>
 
     <!-- Our Story Section -->
     <section class="kentucky-service-area">
