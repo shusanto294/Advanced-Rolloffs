@@ -998,5 +998,14 @@ function advanced_rolloffs_register_elementor_widgets( $widgets_manager ) {
 
     require_once( get_template_directory() . '/elementor-widgets/custom-pricing-tables.php' );
     $widgets_manager->register( new \Custom_Pricing_Tables_Widget() );
+
+    require_once( get_template_directory() . '/elementor-widgets/custom-numbered-text.php' );
+    $widgets_manager->register( new \Custom_Numbered_Text_Widget() );
+
+    require_once( get_template_directory() . '/elementor-widgets/custom-testimonials.php' );
+    $widgets_manager->register( new \Custom_Testimonials_Widget() );
+
+    require_once( get_template_directory() . '/elementor-widgets/custom-cta-section.php' );
+    $widgets_manager->register( new \Custom_CTA_Section_Widget() );
 }
 add_action( 'elementor/widgets/register', 'advanced_rolloffs_register_elementor_widgets' );

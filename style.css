@@ -795,7 +795,8 @@ body {
 /* ===================================
    Why Choose Us
    =================================== */
-.why-choose-us {
+.why-choose-us,
+.custom-numbered-text-section {
     padding: 80px 0;
     background-color: var(--white);
 }
@@ -952,7 +953,8 @@ body {
 /* ===================================
    Testimonials Section
    =================================== */
-.testimonials {
+.testimonials,
+.custom-testimonials-section {
     padding: 80px 0;
     background-color: var(--light-gray);
 }
@@ -1030,14 +1032,16 @@ body {
 /* ===================================
    CTA Section
    =================================== */
-.cta-section {
+.cta-section,
+.custom-cta-section {
     padding: 80px 0;
     background: linear-gradient(135deg, var(--black) 0%, var(--dark-red) 100%);
     position: relative;
     overflow: hidden;
 }
 
-.cta-section::before {
+.cta-section::before,
+.custom-cta-section.has-gradient .cta-gradient-overlay {
     content: '';
     position: absolute;
     top: -50%;
