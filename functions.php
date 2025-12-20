@@ -686,21 +686,27 @@ class Advanced_Rolloffs_Nav_Walker extends Walker_Nav_Menu {
         $title = $item->title;
         $description = $item->description;
         $permalink = $item->url;
-        
+
         $output .= "<li class='nav-item " .  implode(" ", $item->classes) . "'>";
-        
+
         // Add span for current menu item
         if ( in_array( 'current-menu-item', $item->classes ) ) {
             $output .= "<span class='sr-only'>Current page: </span>";
         }
-        
-        $output .= '<a href="' . esc_url( $permalink ) . '" class="nav-link">';
+
+        // Build the target attribute if set
+        $target = '';
+        if ( ! empty( $item->target ) && '_blank' === $item->target ) {
+            $target = ' target="_blank" rel="noopener noreferrer"';
+        }
+
+        $output .= '<a href="' . esc_url( $permalink ) . '" class="nav-link"' . $target . '>';
         $output .= esc_html( $title );
-        
+
         if ( $description && $depth === 0 ) {
             $output .= '<span class="menu-description">' . esc_html( $description ) . '</span>';
         }
-        
+
         $output .= '</a>';
     }
 }

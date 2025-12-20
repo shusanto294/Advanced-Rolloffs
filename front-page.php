@@ -101,7 +101,7 @@ if ( isset( $post->post_name ) && $post->post_name === 'home' ) :
         <div class="container">
             <div class="service-area-content">
                 <div class="service-area-text">
-                    <h2>Roll Off Dumpsters:  Local Indiana Dumpster Rentals for Any Size Project</h2>
+                    <h2>Roll Off Dumpsters:  Local Indianapolis Dumpster Rentals for Any Size Project</h2>
                     <p class="service-area-description">Advanced Roll Offs locally rents out **roll-off dumpsters** for projects of any size in the **Indianapolis, Indiana area**. Our waste disposal solutions are hassle-free, secure, and hygienic. We offer 4 types of **roll-off dumpster rentals**, ranging from 10-yard to 40-yard dumpsters to fit residential cleanouts, construction debris, remodeling, and more.</p><br>
                     <p class="service-area-description">Advanced Roll Offs is the reliable choice for your **dumpster rental needs in Indianapolis, IN**, ensuring a seamless, secure, and sanitary experience with prompt delivery and pickup across the greater Indy metro area. Contact us today for affordable **roll off dumpster rental in Indianapolis, Indiana**!</p>
                 </div>
@@ -327,7 +327,6 @@ if ( isset( $post->post_name ) && $post->post_name === 'home' ) :
 
     <!-- Map section -->
     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6129.187804323374!2d-86.33020102252102!3d39.81610017154237!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x886ca922490160a3%3A0x7e426579d2fd117e!2sAdvanced%20Roll%20Offs!5e0!3m2!1sen!2sus!4v1766080894480!5m2!1sen!2sus" style="border:0;width: 100%; height:450px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-
 
     <!-- CTA Section -->
     <section class="cta-section">

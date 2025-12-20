@@ -28,7 +28,7 @@ get_header();
                     ) );
                     ?>
                 </div>
-                <footer class="entry-footer">
+                <!-- <footer class="entry-footer">
                     <?php
                     // Show last modified date for SEO
                     if ( get_the_modified_time() !== get_the_time() ) {
@@ -42,7 +42,7 @@ get_header();
                         <?php
                     }
                     ?>
-                </footer>
+                </footer> -->
             </article>
             
             <?php
