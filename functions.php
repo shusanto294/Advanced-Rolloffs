@@ -968,3 +968,35 @@ function advanced_rolloffs_accessibility_styles() {
     wp_add_inline_style( 'advanced-rolloffs-style', $custom_css );
 }
 add_action( 'wp_enqueue_scripts', 'advanced_rolloffs_accessibility_styles', 25 );
+
+/**
+ * Elementor Integration
+ */
+
+// Register custom Elementor widget category
+function advanced_rolloffs_add_elementor_widget_categories( $elements_manager ) {
+    $elements_manager->add_category(
+        'advanced-rolloffs',
+        [
+            'title' => __( 'Advanced Rolloffs', 'advanced-rolloffs' ),
+            'icon' => 'fa fa-plug',
+        ]
+    );
+}
+add_action( 'elementor/elements/categories_registered', 'advanced_rolloffs_add_elementor_widget_categories' );
+
+// Register custom Elementor widgets
+function advanced_rolloffs_register_elementor_widgets( $widgets_manager ) {
+    require_once( get_template_directory() . '/elementor-widgets/custom-hero-section.php' );
+    $widgets_manager->register( new \Custom_Hero_Section_Widget() );
+
+    require_once( get_template_directory() . '/elementor-widgets/left-text-right-image.php' );
+    $widgets_manager->register( new \Left_Text_Right_Image_Widget() );
+
+    require_once( get_template_directory() . '/elementor-widgets/custom-icon-text-section.php' );
+    $widgets_manager->register( new \Custom_Icon_Text_Section_Widget() );
+
+    require_once( get_template_directory() . '/elementor-widgets/custom-pricing-tables.php' );
+    $widgets_manager->register( new \Custom_Pricing_Tables_Widget() );
+}
+add_action( 'elementor/widgets/register', 'advanced_rolloffs_register_elementor_widgets' );

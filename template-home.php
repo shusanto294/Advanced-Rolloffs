@@ -1,19 +1,13 @@
 <?php
 /**
- * Front Page Template
- * Shows hardcoded homepage content when page slug is 'home'
- * Otherwise shows the page content for page builder compatibility
+ * Template Name: Home
+ * Template for the Home page
  *
  * @package Advanced_Rolloffs
  * @since 1.0.0
  */
 
 get_header();
-
-// Check if this is the 'home' page slug - if so, show hardcoded template
-global $post;
-if ( isset( $post->post_name ) && $post->post_name === 'home' ) :
-
 ?>
 
     <!-- Hero Section -->
@@ -188,7 +182,7 @@ if ( isset( $post->post_name ) && $post->post_name === 'home' ) :
                     <a href="https://app.icans.ai/customer-portal/advanced-roll-offs/book/" target="_blank" class="btn-link">Get Quote →</a>
                 </div>
                 <div class="size-card">
-                    
+
                     <h3>20 Yard</h3>
                     <p class="size-dimensions">22' L × 8' W × 4.5' H</p>
                     <p>Perfect for medium-sized projects and renovations</p>
@@ -343,27 +337,5 @@ if ( isset( $post->post_name ) && $post->post_name === 'home' ) :
 
 
 <?php
-else :
-    // For other pages, show the content area so page builders can work
-    ?>
-    <main id="main" class="site-main" style="padding: 75px 0;">
-        <div class="container">
-            <?php
-            while ( have_posts() ) :
-                the_post();
-                ?>
-                <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-                    <div class="entry-content">
-                        <?php the_content(); ?>
-                    </div>
-                </article>
-                <?php
-            endwhile;
-            ?>
-        </div>
-    </main>
-    <?php
-endif;
-
 get_footer();
 ?>

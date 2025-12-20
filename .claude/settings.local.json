@@ -3,7 +3,8 @@
     "allow": [
       "Bash(dir:*)",
       "Bash(ls:*)",
-      "Bash(del template-elementor-canvas.php template-elementor-full-width.php elementor-debug.php)"
+      "Bash(del template-elementor-canvas.php template-elementor-full-width.php elementor-debug.php)",
+      "Bash(mkdir:*)"
     ]
   }
 }
